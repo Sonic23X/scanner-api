@@ -13,7 +13,7 @@ class CreateLecturaTable extends Migration
      */
     public function up()
     {
-        Schema::create('lectura', function (Blueprint $table) {
+        Schema::create('lecturas', function (Blueprint $table) {
             $table->id();
             $table->integer('idProducto');
             $table->string('description');
@@ -35,6 +35,6 @@ class CreateLecturaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lectura');
+        Schema::dropIfExists('lecturas');
     }
 }

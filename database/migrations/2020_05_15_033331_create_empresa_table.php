@@ -13,7 +13,7 @@ class CreateEmpresaTable extends Migration
      */
     public function up()
     {
-        Schema::create('empresa', function (Blueprint $table) {
+        Schema::create('empresas', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->timestamps();
@@ -28,6 +28,6 @@ class CreateEmpresaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('empresa');
+        Schema::dropIfExists('empresas');
     }
 }

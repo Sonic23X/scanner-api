@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateProcesoTable extends Migration
 {
+
     /**
      * Run the migrations.
      *
@@ -13,7 +14,7 @@ class CreateProcesoTable extends Migration
      */
     public function up()
     {
-        Schema::create('proceso', function (Blueprint $table) {
+        Schema::create('procesos', function (Blueprint $table) {
             $table->id();
             $table->string('description');
             $table->integer('idEmpresa');
@@ -29,6 +30,6 @@ class CreateProcesoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('proceso');
+        Schema::dropIfExists('procesos');
     }
 }
