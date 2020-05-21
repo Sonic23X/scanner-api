@@ -15,7 +15,7 @@ class LoginController extends Controller
     $validator = Validator::make($request->all(), [
         'name' => 'required',
         'email' => 'required|email',
-		'company' => 'required|string',
+		    'idEmpresa' => 'required',
         'password' => 'required',
         'c_password' => 'required|same:password',
     ]);
@@ -39,7 +39,7 @@ class LoginController extends Controller
     ]);
 
     if (!Auth::attempt($login))
-      return response()->json(['message' => 'invalid argumments'], 200);
+      return response()->json(['message' => 'correo o contraseña incorrectos'], 200);
 
     $accessToken = Auth::user()->createToken('authToken')->accessToken;
 

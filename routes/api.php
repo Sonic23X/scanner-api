@@ -18,7 +18,7 @@ Route::middleware('cors')->group(function()
 {
   //Users
   Route::post('/login', 'api\LoginController@login')->name('login');
-  //Route::post('/register', 'api\LoginController@register');
+  Route::post('/register', 'api\LoginController@register');
 
   //rutas protegidas
   Route::middleware('auth:api')->group(function()

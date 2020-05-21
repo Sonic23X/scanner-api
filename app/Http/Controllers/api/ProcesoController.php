@@ -16,7 +16,7 @@ class ProcesoController extends Controller
      */
     public function get($idEmpresa)
     {
-      return response()->json(Proceso::where('idEmpresa', $idEmpresa), 200);
+      return response()->json(Proceso::where('idEmpresa', $idEmpresa)->get(), 200);
     }
 
     /**
