@@ -31,7 +31,8 @@ Route::middleware('cors')->group(function()
     Route::delete('/empresa/{id}', 'api\EmpresaController@destroy');
 
     //medidas
-    Route::get('/medida', 'api\MedidaController@get');
+    Route::get('/medida', 'api\MedidaController@getAll');
+    Route::get('/medida/{id}', 'api\MedidaController@get');
   	Route::post('/medida', 'api\MedidaController@store');
     Route::put('/medida/{id}', 'api\MedidaController@update');
     Route::delete('/medida/{id}', 'api\MedidaController@destroy');

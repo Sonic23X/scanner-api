@@ -11,12 +11,22 @@ class MedidaController extends Controller
     /**
      * Get a resource in storage.
      *
+     * @return \Illuminate\Http\Response
+     */
+    public function getAll()
+    {
+      return response()->json(Medida::all(), 200);
+    }
+
+    /**
+     * Get a resource in storage.
+     *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function get($id)
+    public function get( $id )
     {
-      return response()->json(Medida::findOrFail($id), 200);
+      return response()->json(Medida::findOrFail( $id ), 200);
     }
 
     /**

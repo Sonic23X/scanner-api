@@ -15,9 +15,14 @@ class ProductoController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function get($id)
+  public function get( $id )
   {
-    return response()->json(Producto::findOrFail($id), 200);
+    $producto = Producto::find( $id );
+
+    if ( $producto != null )
+      return response()->json( [ 'search' => true, 'data' => $producto ], 200 );
+    else
+      return response()->json( [ 'search' => false, 'data' => null ], 200 );
   }
 
     /**

@@ -5,19 +5,15 @@ namespace App\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Lectura extends Model
+class Folio extends Model
 {
   use SoftDeletes;
 
-  protected $fillable =
-  [
-    'idProducto', 'lat', 'lon', 'idArea', 'idEmpresa', 'idUser',
-    'idProceso'
-  ];
+  protected $fillable = [ 'idLectura', 'description' ];
 
   protected $hidden =
   [
-      'updated_at', 'deleted_at'
+      'created_at', 'updated_at', 'deleted_at'
   ];
 
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLecturaTable extends Migration
+class CreateFolioTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,10 @@ class CreateLecturaTable extends Migration
      */
     public function up()
     {
-        Schema::create('lecturas', function (Blueprint $table) {
+        Schema::create('folios', function (Blueprint $table) {
             $table->id();
-            $table->integer('idProducto');
+            $table->integer('idLectura');
             $table->string('description');
-            $table->integer('qty');
-            $table->integer('idMedida');
-            $table->string('lat');
-            $table->string('lon');
-            $table->string('idArea');
-            $table->integer('idEmpresa');
-            $table->integer('idUser');
-            $table->integer('idProceso');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -37,6 +29,6 @@ class CreateLecturaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lecturas');
+        Schema::dropIfExists('folios');
     }
 }

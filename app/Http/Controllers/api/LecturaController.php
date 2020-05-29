@@ -5,6 +5,8 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Entities\Lectura;
+use App\Entities\Producto;
+use App\Entities\Folio;
 
 class LecturaController extends Controller
 {
@@ -17,55 +19,73 @@ class LecturaController extends Controller
     public function store(Request $request)
     {
       $lectura = $request->validate([
-          'idProducto' => 'required',
+          'lat' => 'required',
+          'lon' => 'required',
+          'idArea' => 'required',
+          'idEmpresa' => 'required',
+          'idUser' => 'required',
+          'idProceso' => 'required'
+      ]);
+
+      $producto = $request->validate([
           'description' => 'required',
           'qty' => 'required',
           'idMedida' => 'required',
-          'gps' => 'required',
-          'idArea' => 'required',
+          'serie' => 'required',
+          'caducidad' => 'required',
           'idEmpresa' => 'required',
-          'idUser' => 'required'
       ]);
 
-      Lectura::create($lectura);
+      $product;
+      $folio_desc;
 
-      return response()->json(array('message' => 'Lectura creada'), 201);
+      if ( $request->has( 'idProducto' ) )
+      {
+        $product = Producto::find($request[ 'idProducto' ]);
+        $product->description = $producto[ 'description' ];
+        $product->idMedida = $producto[ 'idMedida' ];
+        $product->idEmpresa = $producto[ 'idEmpresa' ];
+        $product->qty = $producto[ 'qty' ];
+        $product->serie = $producto[ 'serie' ];
+        $product->caducidad = $producto[ 'caducidad' ];
+        $product->save();
+
+        $folio_desc = 'Producto escaneado/actualizado';
+      }
+      else
+      {
+        $product = Producto::create( $producto );
+
+        $folio_desc = 'Producto creado';
+      }
+
+      //guardamos las imagenes
+      $i = 0;
+      $image = "file_";
+      $fotos = [];
+
+      while ($request->has($image . $i))
+      {
+        $file = $request->file($image . $i);
+        $fotos[] = $file->store('producto/'. $product->id .'', 'public');
+        $i++;
+      }
+
+      $product->images = $fotos;
+      $product->save();
+
+      //generamos la lectura
+      $lectura[ 'idProducto' ] = $product->id;
+
+      $reporte = Lectura::create( $lectura );
+
+      $folio = [ 'idLectura' => $reporte->id, 'description' => $folio_desc ];
+
+      $newFolio = Folio::create( $folio );
+
+      return response()->json( [ 'Folio' => $newFolio ], 200);
+
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-      $lectura = $request->validate([
-          'idProducto' => 'required',
-          'description' => 'required',
-          'qty' => 'required',
-          'idMedida' => 'required',
-          'gps' => 'required',
-          'idArea' => 'required',
-          'idEmpresa' => 'required',
-          'idUser' => 'required'
-      ]);
 
-      Lectura::findOrFail($id)->update($lectura);
-
-      return response()->json(array('message' => 'Lectura actualizada'), 200);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-      Lectura::findOrFail($id)->delete();
-      return response()->json(array('message' => 'Lectura eliminada'), 200);
-    }
 }
