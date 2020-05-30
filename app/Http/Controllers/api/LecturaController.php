@@ -39,7 +39,7 @@ class LecturaController extends Controller
       $product;
       $folio_desc;
 
-      if ( $request->has( 'idProducto' ) )
+      if ( Producto::find($request[ 'idProducto' ]) != null )
       {
         $product = Producto::find($request[ 'idProducto' ]);
         $product->description = $producto[ 'description' ];
