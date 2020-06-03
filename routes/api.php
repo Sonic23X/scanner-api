@@ -60,5 +60,8 @@ Route::middleware('cors')->group(function()
     Route::put('/producto/{id}', 'api\ProductoController@update');
     Route::delete('/producto/{id}', 'api\ProductoController@destroy');
 
+    //imagenes
+    Route::get('/image/{folder}/{id}/{name}', 'api\ImageController@get');
+    
   });
 });
