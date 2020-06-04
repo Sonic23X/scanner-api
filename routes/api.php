@@ -61,7 +61,9 @@ Route::middleware('cors')->group(function()
     Route::delete('/producto/{id}', 'api\ProductoController@destroy');
 
     //imagenes
-    Route::get('/image/{folder}/{id}/{name}', 'api\ImageController@get');
-    
+
   });
 });
+
+
+Route::get('/image/{folder}/{id}/{name}', 'api\ImageController@get');

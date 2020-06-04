@@ -16,7 +16,7 @@ class ImageController extends Controller
      */
     public function get( $folder, $id, $name )
     {
-      return Storage::get( 'public/' . $folder . '/' . $id . '/' . $name );
+      return Storage::download( 'public/' . $folder . '/' . $id . '/' . $name );
     }
 
 }
