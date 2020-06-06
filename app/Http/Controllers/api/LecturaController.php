@@ -54,6 +54,7 @@ class LecturaController extends Controller
       }
       else
       {
+        $producto[ 'id' ] = $request[ 'idProducto' ];
         $product = Producto::create( $producto );
 
         $folio_desc = 'Producto creado';
