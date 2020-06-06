@@ -12,7 +12,7 @@ class Producto extends Model
   protected $fillable =
   [
     'description', 'idMedida', 'idEmpresa',
-    'qty', 'serie', 'caducidad'
+    'qty', 'serie', 'caducidad', 'id'
   ];
 
   protected $hidden =
